@@ -10,12 +10,10 @@ export default function Toolbar() {
   const deleteSelected = useEditorStore(s => s.deleteSelected)
   const exportHtml = useEditorStore(s => s.exportHtml)
 
-  // Internal state for raw HTML input mode
   const [showHtmlInput, setShowHtmlInput] = useState(false)
   const [rawHtml, setRawHtml] = useState('')
   const fileInputRef = useRef<HTMLInputElement | null>(null)
 
-  // Handle file upload
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
@@ -70,7 +68,7 @@ export default function Toolbar() {
         <IconButton onClick={() => exportHtml()}>Export</IconButton>
       </div>
 
-      {/* === RAW HTML INPUT AREA === */}
+      {/*  RAW HTML INPUT AREA  */}
       {showHtmlInput && (
         <div className="mt-2">
           <label className="block text-sm font-medium text-gray-700 mb-1">
