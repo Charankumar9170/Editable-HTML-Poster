@@ -1,5 +1,5 @@
 'use client'
-import React from 'react' // 👈 add this line
+import React from 'react' 
 import Toolbar from '../components/Toolbar'
 import CanvasStage from '../components/CanvasStage'
 import PropertiesPanel from '../components/PropertiesPanel'
