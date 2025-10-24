@@ -16,13 +16,11 @@ export default function CanvasStage() {
     setStageRef(el)
   }, [setStageRef])
 
-  // When rawHtml changes, render sanitized HTML into the stage
   useEffect(() => {
     const stage = stageRef.current
     if (!stage) return
     stage.innerHTML = ''
     if (!rawHtml) {
-      // initial empty poster container
       const container = document.createElement('div')
       container.className = 'poster'
       container.style.width = '720px'
@@ -33,11 +31,9 @@ export default function CanvasStage() {
       return
     }
 
-    // Parse the HTML and transplant the poster node if present, else inject body
     const parser = new DOMParser()
     const doc = parser.parseFromString(rawHtml, 'text/html')
     const poster = doc.querySelector('.poster') || doc.body
-    // Assign data-id to elements missing one (so we can select them)
     const assignIds = (node: Element) => {
       if (node.nodeType !== 1) return
       const el = node as HTMLElement
@@ -48,8 +44,6 @@ export default function CanvasStage() {
     }
     assignIds(poster as Element)
 
-    // Insert the poster into stage and preserve styles from <style> in head
-    // Copy styles
     const styleNodes = doc.querySelectorAll('style')
     styleNodes.forEach(s => {
       const copy = document.createElement('style')
@@ -57,13 +51,10 @@ export default function CanvasStage() {
       stage.appendChild(copy)
     })
 
-    // Append poster
     stage.appendChild(poster.cloneNode(true))
 
-    // Click handling inside stage
     const onClick = (ev: MouseEvent) => {
       const target = ev.target as HTMLElement
-      // find nearest element with data-id inside stage
       const el = target.closest('[data-id]') as HTMLElement | null
       if (el && stage.contains(el)) {
         const id = el.getAttribute('data-id')
@@ -81,11 +72,9 @@ export default function CanvasStage() {
     }
   }, [rawHtml, setSelectedId])
 
-  // Highlight selected element via mutation observer or effect
   useEffect(() => {
     const stage = stageRef.current
     if (!stage) return
-    // remove existing outlines
     stage.querySelectorAll('.selected-outline').forEach(el => el.classList.remove('selected-outline'))
     if (!selectedId) return
     const el = stage.querySelector(`[data-id="${selectedId}"]`) as HTMLElement | null
