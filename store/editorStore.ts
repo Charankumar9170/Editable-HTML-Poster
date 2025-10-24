@@ -24,7 +24,7 @@ export const useEditorStore = create<Store>((set, get) => ({
   importHtml(raw) {
     const clean = sanitizeHtml(raw)
     set({ rawHtml: clean })
-    // When rawHtml changes, CanvasStage will render it
+
   },
   selectedId: null,
   setSelectedId(id) { set({ selectedId: id }) },
