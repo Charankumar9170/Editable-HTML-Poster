@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #__next {
+  height: 100%;
+}
+
+/* stage default styles */
+.stage-root {
+  border: 1px dashed rgba(0,0,0,0.08);
+  background: #f8fafc;
+}
+
+.selected-outline {
+  outline: 2px solid rgba(59,130,246,0.8);
+  outline-offset: -4px;
+}
