@@ -1,7 +1,7 @@
 import DOMPurify from 'dompurify'
 
 export function sanitizeHtml(raw: string) {
-  // DOMPurify will clean inline scripts and unsafe attributes
+
   return DOMPurify.sanitize(raw, { ADD_ATTR: ['data-id'] })
 }
 
